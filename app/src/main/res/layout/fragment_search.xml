@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:id="@+id/btn_search"
         android:layout_width="match_parent"
@@ -28,34 +27,25 @@
         style="?attr/materialButtonStyle"
         android:text="search" />
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_search_results"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tv_search_error"
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="8dp">
+        <Button
+            android:id="@+id/btn_dark"
+            style="?attr/materialButtonStyle"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="@color/teal_700"
-            android:visibility="invisible"
-            android:text="search error" />
+            android:layout_marginHorizontal="4dp"
+            android:text="Dark Theme" />
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/loading_indicator"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn_light"
+            style="?attr/materialButtonStyle"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:layout_marginTop="32dp"
-            android:layout_gravity="top|center_horizontal"
-            android:visibility="invisible" />
-
-    </FrameLayout>
-
+            android:layout_marginHorizontal="82dp"
+            android:text="Light Theme" />
+    </LinearLayout>
 </LinearLayout>
