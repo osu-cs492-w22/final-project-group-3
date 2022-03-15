@@ -19,17 +19,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.button.MaterialButton
+
+    <Button
         android:id="@+id/btn_search"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="4dp"
-        android:text="@string/search"
-        android:textColor="@color/textColor"
-        app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/primaryColor"
-        app:strokeWidth="20dp" />
+        android:text="@string/search" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
