@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Raven Lickey/Desktop/Classes/CS 492 Mobile Web Development/final-project-group-3/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2165" />
         <entry key="..\:/Users/Raven Lickey/Desktop/Classes/CS 492 Mobile Web Development/final-project-group-3/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2165" />
+        <entry key="..\:/Users/Raven Lickey/Desktop/Classes/CS 492 Mobile Web Development/final-project-group-3/app/src/main/res/drawable/switch_buttong_bg.xml" value="0.2165" />
         <entry key="..\:/Users/Raven Lickey/Desktop/Classes/CS 492 Mobile Web Development/final-project-group-3/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Raven Lickey/Desktop/Classes/CS 492 Mobile Web Development/final-project-group-3/app/src/main/res/layout/fragment_mastery.xml" value="0.358695652173913" />
-        <entry key="..\:/Users/Raven Lickey/Desktop/Classes/CS 492 Mobile Web Development/final-project-group-3/app/src/main/res/layout/fragment_search.xml" value="0.1" />
+        <entry key="..\:/Users/Raven Lickey/Desktop/Classes/CS 492 Mobile Web Development/final-project-group-3/app/src/main/res/layout/fragment_search.xml" value="0.33" />
         <entry key="..\:/Users/htnca/AndroidStudioProjects/final-project-group-3/app/src/main/res/layout/fragment_search.xml" value="0.1884498480243161" />
       </map>
     </option>

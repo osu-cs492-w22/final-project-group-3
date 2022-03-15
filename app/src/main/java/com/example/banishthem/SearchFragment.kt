@@ -1,10 +1,14 @@
 package com.example.banishthem
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
+import com.google.android.material.button.MaterialButton
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,6 +21,9 @@ private const val ARG_PARAM1 = "param1"
  */
 class SearchFragment : Fragment(R.layout.fragment_search) {
     // TODO: Rename and change types of parameters
+
+
+
     private var entry_text: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +33,39 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val lightModeBtn = view.findViewById<MaterialButton>(R.id.btn_light_theme)
+        val darkModeBtn = view.findViewById<MaterialButton>(R.id.btn_dark_theme)
+
+        val appSettingsPref: SharedPreferences = this.requireActivity().getSharedPreferences("appSettingPrefs", Context.MODE_PRIVATE)
+        val sharedPrefsEdit: SharedPreferences.Editor = appSettingsPref.edit()
+        val isNightModeOn: Boolean = appSettingsPref.getBoolean("NightMode", false)
+
+        if(isNightModeOn){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
+        lightModeBtn.setOnClickListener{
+            if(isNightModeOn) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                sharedPrefsEdit.putBoolean("NightMode", false)
+                sharedPrefsEdit.apply()
+            }
+        }
+        darkModeBtn.setOnClickListener{
+            if(!isNightModeOn) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                sharedPrefsEdit.putBoolean("NightMode", true)
+                sharedPrefsEdit.apply()
+            }
+        }
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

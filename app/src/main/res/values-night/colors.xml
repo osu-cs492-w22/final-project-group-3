@@ -11,7 +11,7 @@
     <color name="dark_green">#00680c</color>
     <color name="light_green">#00b60a</color>
 
-    <color name="primaryColor">#FF03DAC5</color>
-    <color name="secondaryColor">#FF018786</color>
+    <color name="primaryColor">#00b60a</color>
+    <color name="secondaryColor">#00680c</color>
     <color name="textColor">#FF000000</color>
 </resources>
