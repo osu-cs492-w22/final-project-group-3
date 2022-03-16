@@ -44,6 +44,19 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         entry_text = view.findViewById(R.id.et_search_box)
 
+        championViewModel.searchResults.observe(viewLifecycleOwner) { searchResults ->
+            if (searchResults != null) {
+                Log.i("Champion Search Observer", searchResults[0].championId.toString())
+            }
+        }
+
+        summonerViewModel.searchResults.observe(viewLifecycleOwner) { searchResults ->
+            if (searchResults != null) {
+                Log.i("Summoner Search Observer", searchResults.id)
+                championViewModel.loadSearchResults(searchResults.id)
+            }
+        }
+
         if(isNightModeOn){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
@@ -54,19 +67,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         searchBtn.setOnClickListener {
 
             val query =  entry_text.text.toString()
-
-            championViewModel.searchResults.observe(viewLifecycleOwner) { searchResults ->
-                if (searchResults != null) {
-                    Log.i("Champion Search Observer", searchResults[0].championId.toString())
-                }
-            }
-
-            summonerViewModel.searchResults.observe(viewLifecycleOwner) { searchResults ->
-                if (searchResults != null) {
-                    Log.i("Summoner Search Observer", searchResults.id)
-                    championViewModel.loadSearchResults(searchResults.id)
-                }
-            }
 
             summonerViewModel.loadSearchResults(query)
             Log.i("Search Button", "Search Button Clicked")
