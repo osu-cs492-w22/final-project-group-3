@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.button.MaterialButton
+import androidx.fragment.app.viewModels
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,15 +26,20 @@ private const val ARG_PARAM1 = "param1"
 class SearchFragment : Fragment(R.layout.fragment_search) {
     // TODO: Rename and change types of parameters
 
-
+    private val summonerViewModel: SummonerSearchViewModel by viewModels()
+    private val championViewModel: ChampionSearchViewModel by viewModels()
 
     private var entry_text: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             entry_text = it.getString(ARG_PARAM1)
         }
+
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,6 +47,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         val lightModeBtn = view.findViewById<MaterialButton>(R.id.btn_light_theme)
         val darkModeBtn = view.findViewById<MaterialButton>(R.id.btn_dark_theme)
+        val searchBtn = view.findViewById<MaterialButton>(R.id.btn_search)
 
         val appSettingsPref: SharedPreferences = this.requireActivity().getSharedPreferences("appSettingPrefs", Context.MODE_PRIVATE)
         val sharedPrefsEdit: SharedPreferences.Editor = appSettingsPref.edit()
@@ -52,6 +60,24 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
         else{
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
+        searchBtn.setOnClickListener {
+            championViewModel.searchResults.observe(viewLifecycleOwner) { searchResults ->
+                if (searchResults != null) {
+                    Log.i("Champion Search Observer", searchResults[0].championId.toString())
+                }
+            }
+
+            summonerViewModel.searchResults.observe(viewLifecycleOwner) { searchResults ->
+                if (searchResults != null) {
+                    Log.i("Summoner Search Observer", searchResults.id)
+                    championViewModel.loadSearchResults(searchResults.id)
+                }
+            }
+
+            summonerViewModel.loadSearchResults("Sackpappet")
+            Log.i("Search Button", "Search Button Clicked")
         }
 
         lightModeBtn.setOnClickListener{
