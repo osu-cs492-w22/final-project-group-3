@@ -1,10 +1,15 @@
 package com.example.banishthem
 
+import android.content.Context
+import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 
 class ChampionMasteryAdapter  : RecyclerView.Adapter<ChampionMasteryAdapter.ViewHolder>() {
@@ -193,16 +198,24 @@ class ChampionMasteryAdapter  : RecyclerView.Adapter<ChampionMasteryAdapter.View
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(this.championMasteries[position])
     }
-
+    fun getDrawableByFileName(context: Context, fileName: String): Drawable? {
+        return ContextCompat.getDrawable(context, context.resources.getIdentifier(fileName, "drawable", context.packageName))
+    }
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val counterTV: TextView = view.findViewById(R.id.tv_counter)
         private val championIconIV: ImageView = view.findViewById(R.id.iv_champion_icon)
         private val championNameTV: TextView = view.findViewById(R.id.tv_champion_name)
         private val masteryIconIV: ImageView = view.findViewById(R.id.iv_mastery_icon)
         private val championPointsTV: TextView = view.findViewById(R.id.tv_mastery_points)
 
         fun bind(championMastery: ChampionMastery) {
-            this.championNameTV.text = championMastery.championId.toString()
+            this.counterTV.text = (position + 1).toString()
+            this.championNameTV.text = map[championMastery.championId.toString()]
             this.championPointsTV.text = championMastery.championPoints.toString()
+            var name: String = map[championMastery.championId.toString()]!!
+            name = name.filter{ it.isLetterOrDigit() }
+            name = name.lowercase()
+            this.championIconIV.background = getDrawableByFileName(this.championIconIV.context, name)
 
             /*
             //convertion of championID into championName
@@ -215,7 +228,7 @@ class ChampionMasteryAdapter  : RecyclerView.Adapter<ChampionMasteryAdapter.View
                 }
             }
             */
-            this.championNameTV.text = map[this.championNameTV.text]
+
 
         }
     }
