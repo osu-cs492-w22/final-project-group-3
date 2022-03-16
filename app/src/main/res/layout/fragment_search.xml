@@ -57,4 +57,17 @@
             app:strokeColor="@color/light_grey"
             app:strokeWidth="20dp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/share"
+
+        android:layout_gravity="center"
+
+        android:textColor="@color/black"
+        android:backgroundTint="@color/light_grey"
+        />
+
 </LinearLayout>

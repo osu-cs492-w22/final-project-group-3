@@ -1,5 +1,6 @@
 package com.example.banishthem
 
+import android.content.Intent
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.button.MaterialButton
 
@@ -43,6 +45,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         val sharedPrefsEdit: SharedPreferences.Editor = appSettingsPref.edit()
         val isNightModeOn: Boolean = appSettingsPref.getBoolean("NightMode", false)
 
+        val shareBtn = view.findViewById<Button>(R.id.btn_share)
+
         if(isNightModeOn){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
@@ -63,6 +67,16 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 sharedPrefsEdit.putBoolean("NightMode", true)
                 sharedPrefsEdit.apply()
             }
+        }
+
+        shareBtn.setOnClickListener{
+            val s = "TEST2"
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_TEXT, s)
+            //shareIntent.putExtra(Intent.EXTRA_SUBJECT, "SUBJECT HERE...TEST")
+            startActivity(Intent.createChooser(shareIntent, null))
+
         }
 
     }
