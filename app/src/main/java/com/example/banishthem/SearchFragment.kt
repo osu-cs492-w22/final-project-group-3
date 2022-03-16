@@ -10,13 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.button.MaterialButton
 import androidx.fragment.app.viewModels
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
 
 /**
  * A simple [Fragment] subclass.
@@ -29,18 +27,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private val summonerViewModel: SummonerSearchViewModel by viewModels()
     private val championViewModel: ChampionSearchViewModel by viewModels()
 
-    private var entry_text: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            entry_text = it.getString(ARG_PARAM1)
-        }
-
-
-
-    }
+    private lateinit var entry_text: EditText
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,6 +42,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         val shareBtn = view.findViewById<Button>(R.id.btn_share)
 
+        entry_text = view.findViewById(R.id.et_search_box)
+
         if(isNightModeOn){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
@@ -63,6 +52,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
 
         searchBtn.setOnClickListener {
+
+            val query =  entry_text.text.toString()
+
             championViewModel.searchResults.observe(viewLifecycleOwner) { searchResults ->
                 if (searchResults != null) {
                     Log.i("Champion Search Observer", searchResults[0].championId.toString())
@@ -76,7 +68,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 }
             }
 
-            summonerViewModel.loadSearchResults("Sackpappet")
+            summonerViewModel.loadSearchResults(query)
             Log.i("Search Button", "Search Button Clicked")
         }
 
@@ -113,7 +105,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
-
+    /*
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -132,4 +124,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 }
             }
     }
+
+     */
 }
