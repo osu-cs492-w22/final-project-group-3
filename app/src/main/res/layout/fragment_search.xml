@@ -69,5 +69,10 @@
         android:textColor="@color/black"
         android:backgroundTint="@color/light_grey"
         />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/aatrox_0"/>
+
 
 </LinearLayout>
