@@ -6,4 +6,5 @@
     <string name="light_theme">Light Theme</string>
     <string name="search">Search</string>
     <string name="search_hint">Look Up Summoner ID</string>
+    <string name="share">Share</string>
 </resources>
