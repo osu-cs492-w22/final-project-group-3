@@ -68,14 +68,14 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 sharedPrefsEdit.apply()
             }
         }
-        
+
         shareBtn.setOnClickListener{
-            val s = "TEST"
+            val s = "TEST2"
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
-            shareIntent.putExtra("SHARE THIS", s)
-            val chooser = Intent.createChooser(shareIntent, "Share using...")
-            startActivity(chooser)
+            shareIntent.putExtra(Intent.EXTRA_TEXT, s)
+            //shareIntent.putExtra(Intent.EXTRA_SUBJECT, "SUBJECT HERE...TEST")
+            startActivity(Intent.createChooser(shareIntent, null))
 
         }
 
