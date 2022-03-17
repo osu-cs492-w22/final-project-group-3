@@ -1,10 +1,13 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
-    <PreferenceCategory app:title="Dark/Light Mode">
+    <PreferenceCategory
+        app:title="Light/Dark Mode">
 
         <SwitchPreferenceCompat
             app:key="dlMode_settings"
-            app:title="Dark Mode / Light Mode" />
+            app:title="Light Mode / Dark Mode" />
 
     </PreferenceCategory>
 
