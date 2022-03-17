@@ -46,6 +46,7 @@
             android:id="@+id/iv_mastery_icon"
             android:layout_width="72dp"
             android:layout_height="72dp"
+            android:layout_marginStart="28dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_champion_icon"
             app:layout_constraintTop_toBottomOf="@id/iv_champion_icon"
