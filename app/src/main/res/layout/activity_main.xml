@@ -16,15 +16,24 @@
         app:title="@string/app_name"
         app:titleTextColor="@color/white"/>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tablayout"
+    <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabIconTint="@color/primaryColor"
-        app:tabIndicatorColor="@color/primaryColor"
-        app:tabSelectedTextColor="@color/primaryColor"
-        app:tabTextColor="@color/light_grey" />
+        android:layout_height="wrap_content">
 
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabIconTint="@color/primaryColor"
+                app:tabIndicatorColor="@color/primaryColor"
+                app:tabSelectedTextColor="@color/primaryColor"
+                app:tabTextColor="@color/light_grey" />
+        </ScrollView>
+    </HorizontalScrollView>
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
