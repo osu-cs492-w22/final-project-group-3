@@ -33,15 +33,16 @@ class SettingsActivity : AppCompatActivity() {
             val sharedPrefsEdit: SharedPreferences.Editor = appSettingsPref.edit()
             //isNightModeOn = appSettingsPref.getBoolean("@string/dlMode_settings", !isNightModeOn)
 
+            isNightModeOn = appSettingsPref.getBoolean("@string/dlMode_settings", !isNightModeOn)
             isNightModeOn = !isNightModeOn
             if(isNightModeOn){
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                sharedPrefsEdit.putBoolean("@string/dlMode_settings", false)
+                sharedPrefsEdit.putBoolean("@string/dlMode_settings", true)
                 sharedPrefsEdit.apply()
             }
             else{
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                sharedPrefsEdit.putBoolean("@string/dlMode_settings", true)
+                sharedPrefsEdit.putBoolean("@string/dlMode_settings", false)
                 sharedPrefsEdit.apply()
             }
 

@@ -41,23 +41,35 @@ class MainActivity : AppCompatActivity() {
         view_pager.adapter = adapter
 
         var tab_layout = findViewById<TabLayout>(R.id.tablayout)
-        TabLayoutMediator(tab_layout, view_pager) {tab, position ->
+        TabLayoutMediator(tab_layout, view_pager) { tab, position ->
             tab.text = summonersArray[position]
         }.attach()
 
-        //mySettings()
+        mySettings()
+
     }
 
-//    private fun mySettings(){
-//        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-//        val switch = prefs.getBoolean("@string/dlMode_settings", true)
-//
-//        if(switch){
-//            Log.i("switch is on", switch.toString())
-//        }
-//        else{
-//            Log.i("switch is off", switch.toString())
-//        }
+    private fun mySettings() {
+        val sharedPreference = getSharedPreferences("appSettingPrefs", Context.MODE_PRIVATE)
+        val sharedPrefsEdit: SharedPreferences.Editor = sharedPreference.edit()
+        isNightModeOn = sharedPreference.getBoolean("@string/dlMode_settings", true)
+
+        if (isNightModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            sharedPrefsEdit.putBoolean("@string/dlMode_settings", true)
+            sharedPrefsEdit.apply()
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            sharedPrefsEdit.putBoolean("@string/dlMode_settings", false)
+            sharedPrefsEdit.apply()
+        }
+
+    }
+//    override fun onResume() {
+//        super.onResume()
+//        val appSettingsPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+//        val sharedPrefsEdit: SharedPreferences.Editor = appSettingsPref.edit()
+//        isNightModeOn = appSettingsPref.getBoolean("@string/dlMode_settings", !isNightModeOn)
 //    }
 
 
