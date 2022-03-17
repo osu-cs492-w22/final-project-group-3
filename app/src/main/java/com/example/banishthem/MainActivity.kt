@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         var view_pager = findViewById<ViewPager2>(R.id.viewpager)
         var adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
         view_pager.adapter = adapter
+        view_pager.setOffscreenPageLimit(4)
 
         var tab_layout = findViewById<TabLayout>(R.id.tablayout)
         TabLayoutMediator(tab_layout, view_pager) { tab, position ->
