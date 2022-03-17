@@ -216,6 +216,8 @@ class ChampionMasteryAdapter  : RecyclerView.Adapter<ChampionMasteryAdapter.View
             name = name.filter{ it.isLetterOrDigit() }
             name = name.lowercase()
             this.championIconIV.background = getDrawableByFileName(this.championIconIV.context, name)
+            var mastery: String = "mastery"+ championMastery.championLevel.toString()
+            this.masteryIconIV.background = getDrawableByFileName(this.championIconIV.context, mastery)
 
             /*
             //convertion of championID into championName
