@@ -1,5 +1,6 @@
 package com.example.banishthem
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.Log
@@ -13,7 +14,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 
 class ChampionMasteryAdapter  : RecyclerView.Adapter<ChampionMasteryAdapter.ViewHolder>() {
-    val championMasteries: MutableList<ChampionMastery> = mutableListOf()
+    var championMasteries = listOf<ChampionMastery>()
     val map = hashMapOf(
         "266" to "Aatrox",
         "103" to "Ahri",
@@ -178,16 +179,17 @@ class ChampionMasteryAdapter  : RecyclerView.Adapter<ChampionMasteryAdapter.View
 
     override fun getItemCount() = this.championMasteries.size
 
-    fun addChampionMastery(championMastery: ChampionMastery, position: Int = 0) {
-        this.championMasteries.add(position, championMastery)
-        this.notifyItemInserted(position)
+    fun updateChampionMastery(newChampionMasteryList: List<ChampionMastery>?) {
+        this.championMasteries = newChampionMasteryList ?: listOf()
+        notifyDataSetChanged()
     }
-
+    /*
     fun deleteChampionMasteryAt(position: Int): ChampionMastery {
         val championMastery = this.championMasteries.removeAt(position)
         this.notifyItemRemoved(position)
         return championMastery
     }
+    */
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -216,7 +218,7 @@ class ChampionMasteryAdapter  : RecyclerView.Adapter<ChampionMasteryAdapter.View
             name = name.filter{ it.isLetterOrDigit() }
             name = name.lowercase()
             this.championIconIV.background = getDrawableByFileName(this.championIconIV.context, name)
-            var mastery: String = "mastery"+ championMastery.championLevel.toString()
+            var mastery: String = "mastery" + championMastery.championLevel.toString()
             this.masteryIconIV.background = getDrawableByFileName(this.championIconIV.context, mastery)
 
             /*
