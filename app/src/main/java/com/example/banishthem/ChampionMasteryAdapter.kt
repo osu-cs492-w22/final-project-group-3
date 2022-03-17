@@ -204,15 +204,15 @@ class ChampionMasteryAdapter  : RecyclerView.Adapter<ChampionMasteryAdapter.View
         return ContextCompat.getDrawable(context, context.resources.getIdentifier(fileName, "drawable", context.packageName))
     }
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val counterTV: TextView = view.findViewById(R.id.tv_counter)
+        //private val counterTV: TextView = view.findViewById(R.id.tv_counter)
         private val championIconIV: ImageView = view.findViewById(R.id.iv_champion_icon)
         private val championNameTV: TextView = view.findViewById(R.id.tv_champion_name)
         private val masteryIconIV: ImageView = view.findViewById(R.id.iv_mastery_icon)
         private val championPointsTV: TextView = view.findViewById(R.id.tv_mastery_points)
 
         fun bind(championMastery: ChampionMastery) {
-            this.counterTV.text = (position + 1).toString()
-            //this.championNameTV.text = map[championMastery.championId.toString()]
+            //this.counterTV.text = (position + 1).toString()
+            this.championNameTV.text = map[championMastery.championId.toString()]
             this.championPointsTV.text = championMastery.championPoints.toString()
             var name: String = map[championMastery.championId.toString()]!!
             name = name.filter{ it.isLetterOrDigit() }
