@@ -8,7 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 //API Key
-private const val API_KEY = "RGAPI-0c0ab32a-7a1d-48d7-ade4-0697174c7067"
+private const val API_KEY = "RGAPI-00b63b1d-1779-46ef-b16e-9b2357d2a0dd"
 
 interface RiotService {
     @GET("/lol/summoner/v4/summoners/by-name/{name}?api_key=${API_KEY}")
