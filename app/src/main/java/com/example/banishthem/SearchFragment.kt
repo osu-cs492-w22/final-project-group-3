@@ -1,21 +1,23 @@
 package com.example.banishthem
 
-import android.content.Intent
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import com.google.android.material.button.MaterialButton
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 
 
 /**
@@ -31,7 +33,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private lateinit var entry_text: EditText
     private lateinit var masteryListRV: RecyclerView
+    private lateinit var searchErrorTV: TextView
 
+    private var searchPressed: Boolean = false
+    private val championMasteries: MutableList<ChampionMastery> = mutableListOf()
+    private var query: String =""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,6 +46,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         val darkModeBtn = view.findViewById<MaterialButton>(R.id.btn_dark_theme)
         val searchBtn = view.findViewById<MaterialButton>(R.id.btn_search)
         val shareBtn = view.findViewById<Button>(R.id.btn_share)
+        searchErrorTV = view.findViewById(R.id.tv_search_error)
 
         val appSettingsPref: SharedPreferences = this.requireActivity().getSharedPreferences("appSettingPrefs", Context.MODE_PRIVATE)
         val sharedPrefsEdit: SharedPreferences.Editor = appSettingsPref.edit()
@@ -57,8 +64,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             if (searchResults != null) {
                 Log.i("Champion Search Observer", searchResults[0].championId.toString())
 
+                championMasteries.clear()
                 val championListSize = searchResults.size
-                val championMasteries: MutableList<ChampionMastery> = mutableListOf()
+
                 if(championListSize < 5){
                     for(i in 0 until championListSize){
                         championMasteries.add(i, searchResults[i])
@@ -72,6 +80,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 masteryListAdapter.updateChampionMastery(championMasteries)
                 //masteryListAdapter.addChampionMastery(searchResults[0],0)
                //masteryListAdapter.addChampionMastery(searchResults[1], 1)
+                shareBtn.visibility = View.VISIBLE
+            }
+            else{
+                shareBtn.visibility = View.INVISIBLE
             }
         }
 
@@ -79,6 +91,16 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             if (searchResults != null) {
                 Log.i("Summoner Search Observer", searchResults.id)
                 championViewModel.loadSearchResults(searchResults.id)
+                searchErrorTV.visibility = View.INVISIBLE
+                searchPressed = false
+            } else {
+                if(searchPressed) {
+                    //display error
+                    Log.i("Summoner Search Observer", "summoner id does not exist")
+                    searchErrorTV.visibility = View.VISIBLE
+                    val emptyChampionMasteries: MutableList<ChampionMastery> = mutableListOf()
+                    masteryListAdapter.updateChampionMastery(emptyChampionMasteries)
+                }
             }
         }
 
@@ -91,10 +113,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         searchBtn.setOnClickListener {
 
-            val query =  entry_text.text.toString()
+            query =  entry_text.text.toString()
 
             summonerViewModel.loadSearchResults(query)
             Log.i("Search Button", "Search Button Clicked")
+            searchPressed = true
         }
 
         lightModeBtn.setOnClickListener{
@@ -113,7 +136,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
 
         shareBtn.setOnClickListener{
-            val s = "TEST2"
+            var s: String = "Summoner: $query \n "
+            for(i in 0..4) {
+                s += masteryListAdapter.map[championMasteries[i].championId.toString()] + ": " + championMasteries[i].championPoints + " points"
+                if (i != 4)
+                    s+= "\n"
+            }
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_TEXT, s)

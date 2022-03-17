@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ChampionMasteryAdapter  : RecyclerView.Adapter<ChampionMasteryAdapter.ViewHolder>() {
     var championMasteries = listOf<ChampionMastery>()
-    val map = hashMapOf(
+    public val map = hashMapOf(
         "266" to "Aatrox",
         "103" to "Ahri",
         "84" to "Akali",
@@ -217,6 +217,7 @@ class ChampionMasteryAdapter  : RecyclerView.Adapter<ChampionMasteryAdapter.View
             var name: String = map[championMastery.championId.toString()]!!
             name = name.filter{ it.isLetterOrDigit() }
             name = name.lowercase()
+            //Log.i("BIND", name) //used to find the champion name that is breaking the app
             this.championIconIV.background = getDrawableByFileName(this.championIconIV.context, name)
             var mastery: String = "mastery" + championMastery.championLevel.toString()
             this.masteryIconIV.background = getDrawableByFileName(this.championIconIV.context, mastery)
