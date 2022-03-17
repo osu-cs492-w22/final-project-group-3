@@ -50,7 +50,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         val appSettingsPref: SharedPreferences = this.requireActivity().getSharedPreferences("appSettingPrefs", Context.MODE_PRIVATE)
         val sharedPrefsEdit: SharedPreferences.Editor = appSettingsPref.edit()
-        isNightModeOn = appSettingsPref.getBoolean("NightMode", false)
+        //isNightModeOn = appSettingsPref.getBoolean("NightMode", false)
 
 
         masteryListRV = view.findViewById(R.id.rv_mastery_list)

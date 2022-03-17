@@ -29,8 +29,6 @@ var isNightModeOn: Boolean = false;
 
 
 class MainActivity : AppCompatActivity() {
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -50,17 +48,17 @@ class MainActivity : AppCompatActivity() {
         //mySettings()
     }
 
-    private fun mySettings(){
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val switch = prefs.getBoolean("@string/dlMode_settings", true)
-
-        if(switch){
-            Log.i("switch is on", switch.toString())
-        }
-        else{
-            Log.i("switch is off", switch.toString())
-        }
-    }
+//    private fun mySettings(){
+//        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+//        val switch = prefs.getBoolean("@string/dlMode_settings", true)
+//
+//        if(switch){
+//            Log.i("switch is on", switch.toString())
+//        }
+//        else{
+//            Log.i("switch is off", switch.toString())
+//        }
+//    }
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
