@@ -77,6 +77,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 masteryListAdapter.updateChampionMastery(championMasteries)
                 //masteryListAdapter.addChampionMastery(searchResults[0],0)
                //masteryListAdapter.addChampionMastery(searchResults[1], 1)
+                shareBtn.visibility = View.VISIBLE
+            }
+            else{
+                shareBtn.visibility = View.INVISIBLE
             }
         }
 

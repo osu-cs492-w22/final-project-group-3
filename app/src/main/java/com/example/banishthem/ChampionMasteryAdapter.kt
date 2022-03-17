@@ -217,6 +217,7 @@ class ChampionMasteryAdapter  : RecyclerView.Adapter<ChampionMasteryAdapter.View
             var name: String = map[championMastery.championId.toString()]!!
             name = name.filter{ it.isLetterOrDigit() }
             name = name.lowercase()
+            //Log.i("BIND", name) //used to find the champion name that is breaking the app
             this.championIconIV.background = getDrawableByFileName(this.championIconIV.context, name)
             var mastery: String = "mastery" + championMastery.championLevel.toString()
             this.masteryIconIV.background = getDrawableByFileName(this.championIconIV.context, mastery)
