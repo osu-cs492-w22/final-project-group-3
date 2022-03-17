@@ -210,7 +210,7 @@ class ChampionMasteryAdapter  : RecyclerView.Adapter<ChampionMasteryAdapter.View
 
         fun bind(championMastery: ChampionMastery) {
             this.counterTV.text = (position + 1).toString()
-            this.championNameTV.text = map[championMastery.championId.toString()]
+            //this.championNameTV.text = map[championMastery.championId.toString()]
             this.championPointsTV.text = championMastery.championPoints.toString()
             var name: String = map[championMastery.championId.toString()]!!
             name = name.filter{ it.isLetterOrDigit() }
@@ -219,17 +219,6 @@ class ChampionMasteryAdapter  : RecyclerView.Adapter<ChampionMasteryAdapter.View
             var mastery: String = "mastery"+ championMastery.championLevel.toString()
             this.masteryIconIV.background = getDrawableByFileName(this.championIconIV.context, mastery)
 
-            /*
-            //convertion of championID into championName
-            for((key, value) in map)
-            {
-                if(this.championNameTV.text == key)
-                {
-                    this.championNameTV.text = value
-                    break
-                }
-            }
-            */
 
 
         }
