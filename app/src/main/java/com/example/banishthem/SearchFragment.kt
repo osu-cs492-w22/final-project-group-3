@@ -64,6 +64,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             if (searchResults != null) {
                 Log.i("Champion Search Observer", searchResults[0].championId.toString())
 
+                championMasteries.clear()
                 val championListSize = searchResults.size
 
                 if(championListSize < 5){
