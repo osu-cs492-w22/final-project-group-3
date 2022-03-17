@@ -8,7 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 //API Key
-private const val API_KEY = "RGAPI-00b63b1d-1779-46ef-b16e-9b2357d2a0dd"
+private const val API_KEY = "RGAPI-93a4549e-8287-4fb5-aafa-aa2c1bf423c1"
 
 interface ChampionService {
     @GET("/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedId}?api_key=${API_KEY}")
