@@ -1,21 +1,23 @@
 package com.example.banishthem
 
-import android.content.Intent
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import com.google.android.material.button.MaterialButton
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 
 
 /**
@@ -31,7 +33,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private lateinit var entry_text: EditText
     private lateinit var masteryListRV: RecyclerView
+    private lateinit var searchErrorTV: TextView
 
+    private var searchPressed: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,6 +44,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         val darkModeBtn = view.findViewById<MaterialButton>(R.id.btn_dark_theme)
         val searchBtn = view.findViewById<MaterialButton>(R.id.btn_search)
         val shareBtn = view.findViewById<Button>(R.id.btn_share)
+        searchErrorTV = view.findViewById(R.id.tv_search_error)
 
         val appSettingsPref: SharedPreferences = this.requireActivity().getSharedPreferences("appSettingPrefs", Context.MODE_PRIVATE)
         val sharedPrefsEdit: SharedPreferences.Editor = appSettingsPref.edit()
@@ -79,6 +84,16 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             if (searchResults != null) {
                 Log.i("Summoner Search Observer", searchResults.id)
                 championViewModel.loadSearchResults(searchResults.id)
+                searchErrorTV.visibility = View.INVISIBLE
+                searchPressed = false
+            } else {
+                if(searchPressed) {
+                    //display error
+                    Log.i("Summoner Search Observer", "summoner id does not exist")
+                    searchErrorTV.visibility = View.VISIBLE
+                    val championMasteries: MutableList<ChampionMastery> = mutableListOf()
+                    masteryListAdapter.updateChampionMastery(championMasteries)
+                }
             }
         }
 
@@ -95,6 +110,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
             summonerViewModel.loadSearchResults(query)
             Log.i("Search Button", "Search Button Clicked")
+            searchPressed = true
         }
 
         lightModeBtn.setOnClickListener{

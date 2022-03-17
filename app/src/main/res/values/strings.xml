@@ -7,4 +7,5 @@
     <string name="search">Search</string>
     <string name="search_hint">Look Up Summoner ID</string>
     <string name="share">Share</string>
+    <string name="search_error"> The summoner you are trying to look up does not exist. Please try a different summoner name</string>
 </resources>
