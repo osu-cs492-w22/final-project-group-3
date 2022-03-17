@@ -130,6 +130,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
+
     /*
     companion object {
         /**
