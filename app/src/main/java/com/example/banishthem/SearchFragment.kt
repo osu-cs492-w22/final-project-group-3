@@ -58,17 +58,18 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 Log.i("Champion Search Observer", searchResults[0].championId.toString())
 
                 val championListSize = searchResults.size
-
+                val championMasteries: MutableList<ChampionMastery> = mutableListOf()
                 if(championListSize < 5){
                     for(i in 0 until championListSize){
-                        masteryListAdapter.addChampionMastery(searchResults[i],i)
+                        championMasteries.add(i, searchResults[i])
                     }
                 }
                 else{
                     for(i in 0..4){
-                        masteryListAdapter.addChampionMastery(searchResults[i],i)
+                        championMasteries.add(i, searchResults[i])
                     }
                 }
+                masteryListAdapter.updateChampionMastery(championMasteries)
                 //masteryListAdapter.addChampionMastery(searchResults[0],0)
                //masteryListAdapter.addChampionMastery(searchResults[1], 1)
             }
