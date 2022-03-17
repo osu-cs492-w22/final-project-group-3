@@ -25,6 +25,9 @@ val summonersArray = arrayOf(
     "Summoner5"
 )
 
+var isNightModeOn: Boolean = false;
+
+
 class MainActivity : AppCompatActivity() {
 
 
@@ -44,18 +47,18 @@ class MainActivity : AppCompatActivity() {
             tab.text = summonersArray[position]
         }.attach()
 
-        mySettings()
+        //mySettings()
     }
 
     private fun mySettings(){
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val switch = prefs.getBoolean("dlMode_settings", false)
+        val switch = prefs.getBoolean("@string/dlMode_settings", true)
 
         if(switch){
-            Log.i("switch is on", "SWITCH ON")
+            Log.i("switch is on", switch.toString())
         }
         else{
-            Log.i("switch is off", "SWITCH OFF")
+            Log.i("switch is off", switch.toString())
         }
     }
 

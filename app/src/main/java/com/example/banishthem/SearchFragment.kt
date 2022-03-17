@@ -42,15 +42,15 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val lightModeBtn = view.findViewById<MaterialButton>(R.id.btn_light_theme)
-        val darkModeBtn = view.findViewById<MaterialButton>(R.id.btn_dark_theme)
+//        val lightModeBtn = view.findViewById<MaterialButton>(R.id.btn_light_theme)
+//        val darkModeBtn = view.findViewById<MaterialButton>(R.id.btn_dark_theme)
         val searchBtn = view.findViewById<MaterialButton>(R.id.btn_search)
         val shareBtn = view.findViewById<Button>(R.id.btn_share)
         searchErrorTV = view.findViewById(R.id.tv_search_error)
 
         val appSettingsPref: SharedPreferences = this.requireActivity().getSharedPreferences("appSettingPrefs", Context.MODE_PRIVATE)
         val sharedPrefsEdit: SharedPreferences.Editor = appSettingsPref.edit()
-        val isNightModeOn: Boolean = appSettingsPref.getBoolean("NightMode", false)
+        isNightModeOn = appSettingsPref.getBoolean("NightMode", false)
 
 
         masteryListRV = view.findViewById(R.id.rv_mastery_list)
@@ -104,12 +104,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
         }
 
-        if(isNightModeOn){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
-        else{
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
+//        if(isNightModeOn){
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//        }
+//        else{
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//        }
 
         searchBtn.setOnClickListener {
 
@@ -120,20 +120,20 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             searchPressed = true
         }
 
-        lightModeBtn.setOnClickListener{
-            if(isNightModeOn) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                sharedPrefsEdit.putBoolean("NightMode", false)
-                sharedPrefsEdit.apply()
-            }
-        }
-        darkModeBtn.setOnClickListener{
-            if(!isNightModeOn) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                sharedPrefsEdit.putBoolean("NightMode", true)
-                sharedPrefsEdit.apply()
-            }
-        }
+//        lightModeBtn.setOnClickListener{
+//            if(isNightModeOn) {
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//                sharedPrefsEdit.putBoolean("NightMode", false)
+//                sharedPrefsEdit.apply()
+//            }
+//        }
+//        darkModeBtn.setOnClickListener{
+//            if(!isNightModeOn) {
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//                sharedPrefsEdit.putBoolean("NightMode", true)
+//                sharedPrefsEdit.apply()
+//            }
+//        }
 
         shareBtn.setOnClickListener{
             var s: String = "Summoner: $query \n "
