@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ChampionMasteryAdapter  : RecyclerView.Adapter<ChampionMasteryAdapter.ViewHolder>() {
     var championMasteries = listOf<ChampionMastery>()
-    val map = hashMapOf(
+    public val map = hashMapOf(
         "266" to "Aatrox",
         "103" to "Ahri",
         "84" to "Akali",

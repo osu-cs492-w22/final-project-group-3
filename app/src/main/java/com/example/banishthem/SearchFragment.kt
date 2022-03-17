@@ -36,6 +36,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private lateinit var searchErrorTV: TextView
 
     private var searchPressed: Boolean = false
+    private val championMasteries: MutableList<ChampionMastery> = mutableListOf()
+    private var query: String =""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,7 +65,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 Log.i("Champion Search Observer", searchResults[0].championId.toString())
 
                 val championListSize = searchResults.size
-                val championMasteries: MutableList<ChampionMastery> = mutableListOf()
+
                 if(championListSize < 5){
                     for(i in 0 until championListSize){
                         championMasteries.add(i, searchResults[i])
@@ -95,8 +97,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     //display error
                     Log.i("Summoner Search Observer", "summoner id does not exist")
                     searchErrorTV.visibility = View.VISIBLE
-                    val championMasteries: MutableList<ChampionMastery> = mutableListOf()
-                    masteryListAdapter.updateChampionMastery(championMasteries)
+                    val emptyChampionMasteries: MutableList<ChampionMastery> = mutableListOf()
+                    masteryListAdapter.updateChampionMastery(emptyChampionMasteries)
                 }
             }
         }
@@ -110,7 +112,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         searchBtn.setOnClickListener {
 
-            val query =  entry_text.text.toString()
+            query =  entry_text.text.toString()
 
             summonerViewModel.loadSearchResults(query)
             Log.i("Search Button", "Search Button Clicked")
@@ -133,7 +135,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
 
         shareBtn.setOnClickListener{
-            val s = "TEST2"
+            var s: String = "Summoner: $query \n "
+            for(i in 0..4) {
+                s += masteryListAdapter.map[championMasteries[i].championId.toString()] + ": " + championMasteries[i].championPoints + " points"
+                if (i != 4)
+                    s+= "\n"
+            }
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_TEXT, s)
